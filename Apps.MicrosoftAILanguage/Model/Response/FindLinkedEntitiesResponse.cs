@@ -18,7 +18,7 @@ namespace Apps.MicrosoftAILanguage.Model.Response
             Language = linkedEntity.Language;
             DataSource = linkedEntity.DataSource;
             DataSourceEntityId = linkedEntity.DataSourceEntityId;
-            BindEntitySearchApiId = linkedEntity.BindEntitySearchApiId;
+            BingEntitySearchApiId = linkedEntity.BingEntitySearchApiId;
         }
         public string Name { get; set; }
         public string Url { get; set; }
@@ -31,6 +31,6 @@ namespace Apps.MicrosoftAILanguage.Model.Response
         public string DataSourceEntityId { get; set; }
 
         [Display("Bind entity search API ID")]
-        public string BindEntitySearchApiId { get; set; }
+        public string BingEntitySearchApiId { get; set; }
     }
 }
