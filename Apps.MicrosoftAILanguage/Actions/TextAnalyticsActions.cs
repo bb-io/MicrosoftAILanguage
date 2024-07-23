@@ -14,6 +14,7 @@ namespace Apps.MicrosoftAILanguage.Actions
         {
         }
 
+        [Action("Detect language", Description = "Detect language")]
         public async Task<DetectLanguageResponse> DetectLanguage(
             [ActionParameter] DetectLanguageRequest detectLanguageRequest)
         {
