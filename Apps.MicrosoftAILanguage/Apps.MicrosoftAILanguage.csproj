@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Product>Microsoft AI Language</Product>
+    <Description>Azure AI Language is a cloud-based service that provides Natural Language Processing (NLP) features for understanding and analyzing text</Description>
+    <Version>1.0.0</Version>
+    <AssemblyName>Apps.MicrosoftAILanguage</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.AI.TextAnalytics" Version="5.3.0" />
+    <PackageReference Include="Blackbird.Applications.Sdk.Common" Version="2.8.0" />
+    <PackageReference Include="Blackbird.Applications.Sdk.Utils" Version="1.0.25" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource CopyToOutputDirectory="Always" Include="image\icon.png"/>
+  </ItemGroup>
+
+</Project>
