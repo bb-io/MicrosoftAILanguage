@@ -1,6 +1,7 @@
 ﻿using Apps.MicrosoftAILanguage.Invocables;
 using Apps.MicrosoftAILanguage.Model.Request;
 using Apps.MicrosoftAILanguage.Model.Response;
+using Azure.AI.TextAnalytics;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
@@ -22,26 +23,61 @@ namespace Apps.MicrosoftAILanguage.Actions
             return new(result.Value);
         }
 
-        [Action("Summarize text", Description = "Summarize text")]
-        public async Task SummarizeText(
-            [ActionParameter] TextContentRequest textAnalyticsRequest,
-            [ActionParameter] SummarizeTextRequest summarizeTextRequest)
+        [Action("Summarize text (abstractive)", Description = "Summarize text (abstractive)")]
+        public async Task<AbstractiveSummarizeResponse> SummarizeTextAbstractive(
+            [ActionParameter] TextContentRequest textAnalyticsRequest)
         {
-            //if(summarizeTextRequest.SummarizeType == "abstractive")
-            //{
-            //}
-            //else
-            //{
-            //    var result = await Client.ExtractiveSummarizeAsync(Azure.WaitUntil.Completed, new List<string>() { textAnalyticsRequest.Text });
-            //    return result.GetValues()..Select(x => x.)
-            //}
+            var result = new AbstractiveSummarizeResponse();
+            var operation = Client.AbstractiveSummarize(Azure.WaitUntil.Completed, new List<string>() { textAnalyticsRequest.Text });
+            await foreach (var documentsInPage in operation.Value)
+            {
+                foreach (var documentResult in documentsInPage)
+                {
+                    foreach (var summary in documentResult.Summaries)
+                    {
+                        var abstractiveSummary = new CustomAbstractiveSummary();
+                        abstractiveSummary.Text = summary.Text.Replace("\n", " ");
+                        foreach (var context in summary.Contexts)
+                        {
+                            abstractiveSummary.Contexts.Add(new() { Offset = context.Offset, Length = context.Length });
+                        }
+                        result.Summaries.Add(abstractiveSummary);
+                    }
+                }
+            }
+            return result;
+        }
+
+        [Action("Summarize text (extractive)", Description = "Summarize text (extractive)")]
+        public async Task<ExtractiveSummarizeResponse> SummarizeTextExtractive(
+            [ActionParameter] TextContentRequest textAnalyticsRequest)
+        {
+            var result = new ExtractiveSummarizeResponse();
+            var operation = Client.ExtractiveSummarize(Azure.WaitUntil.Completed, new List<string>() { textAnalyticsRequest.Text });
+            await foreach (var documentsInPage in operation.Value)
+            {
+                foreach (var documentResult in documentsInPage)
+                {
+                    foreach (var sentence in documentResult.Sentences)
+                    {
+                        result.Summaries.Add(new()
+                        {
+                            Sentence = sentence.Text,
+                            RankScore = sentence.RankScore,
+                            Offset = sentence.Offset,
+                            Length = sentence.Length
+                        });
+                    }
+                }
+            }
+            return result;
         }
 
         [Action("Extract key phrases", Description = "Extract key phrases")]
         public async Task<ExtractKeyPhrasesResponse> ExtractKeyPhrases(
             [ActionParameter] TextContentRequest extractKeyPhrasesRequest)
         {
-            var result = await Client.ExtractKeyPhrasesAsync(extractKeyPhrasesRequest.Text);        
+            var result = await Client.ExtractKeyPhrasesAsync(extractKeyPhrasesRequest.Text);
             return new()
             {
                 KeyPhrases = result.Value.ToList()
