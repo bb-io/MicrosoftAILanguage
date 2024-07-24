@@ -2,6 +2,11 @@
 {
     public class ExtractiveSummarizeResponse
     {
+        public ExtractiveSummarizeResponse()
+        {
+            Summaries = new();
+        }
+
         public List<CustomExtractiveSummary> Summaries { get; set; }
     }
 

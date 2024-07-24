@@ -116,5 +116,35 @@ namespace Apps.MicrosoftAILanguage.Actions
         //        PiiInformation = result.Value.Select(x => new PiiInformation(x)).ToList()
         //    };
         //}
+
+        [Action("Analyze sentiment", Description = "Analyze sentiment")]
+        public async Task<AnalyzeSentimentResponse> AnalyzeSentiment(
+            [ActionParameter] TextContentRequest indentifyPerInformationRequest)
+        {
+            var result = await Client.AnalyzeSentimentAsync(indentifyPerInformationRequest.Text);
+            return new()
+            {
+                Sentiment = result.Value.Sentiment.ToString(),
+                Sentences = result.Value.Sentences.Select(x => new CustomSentenceSentiment(x)).ToList(),
+                ConfidenceScoreNegative = result.Value.ConfidenceScores.Negative,
+                ConfidenceScoreNeutral = result.Value.ConfidenceScores.Neutral,
+                ConfidenceScorePositive = result.Value.ConfidenceScores.Positive
+            };
+        }
+
+        //[Action("Custom classify text", Description = "Custom classify text")]
+        //public async Task<AnalyzeSentimentResponse> CustomClassifyText(
+        //    [ActionParameter] TextContentRequest indentifyPerInformationRequest)
+        //{
+        //    var result = await Client.Si(indentifyPerInformationRequest.Text);
+        //    return new()
+        //    {
+        //        Sentiment = result.Value.Sentiment.ToString(),
+        //        Sentences = result.Value.Sentences.Select(x => new CustomSentenceSentiment(x)).ToList(),
+        //        ConfidenceScoreNegative = result.Value.ConfidenceScores.Negative,
+        //        ConfidenceScoreNeutral = result.Value.ConfidenceScores.Neutral,
+        //        ConfidenceScorePositive = result.Value.ConfidenceScores.Positive
+        //    };
+        //}
     }
 }
