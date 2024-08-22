@@ -4,9 +4,9 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Product>Microsoft AI Language [BETA]</Product>
+    <Product>Azure AI Language [BETA]</Product>
     <Description>Azure AI Language is a cloud-based service that provides Natural Language Processing (NLP) features for understanding and analyzing text.</Description>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <AssemblyName>Apps.MicrosoftAILanguage</AssemblyName>
   </PropertyGroup>
 

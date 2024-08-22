@@ -1,4 +1,4 @@
-# Blackbird.io Microsoft AI Language
+# Blackbird.io Azure AI Language
 
 Blackbird is the new automation backbone for the language technology industry. Blackbird provides enterprise-scale automation and orchestration with a simple no-code/low-code platform. Blackbird enables ambitious organizations to identify, vet and automate as many processes as possible. Not just localization workflows, but any business and IT process. This repository represents an application that is deployable on Blackbird and usable inside the workflow editor.
 
@@ -17,7 +17,7 @@ Before you can connect you need to make sure that:
 
 ## Connecting
 
-1. Navigate to Apps, and identify the **Microsoft AI Language** app. You can use search to find it.
+1. Navigate to Apps, and identify the **Azure AI Language** app. You can use search to find it.
 2. Click _Add Connection_.
 3. Name your connection for future reference e.g. 'My AI Language'.
 4. Enter the `API key`, and `Endpoint` for your Language AI instance.
