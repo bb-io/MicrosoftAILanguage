@@ -1,7 +1,6 @@
 ﻿using Apps.MicrosoftAILanguage.Invocables;
 using Apps.MicrosoftAILanguage.Model.Request;
 using Apps.MicrosoftAILanguage.Model.Response;
-using Azure.AI.TextAnalytics;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
