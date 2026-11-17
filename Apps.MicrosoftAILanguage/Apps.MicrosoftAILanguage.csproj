@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <Product>Azure AI Language</Product>
     <Description>Azure AI Language is a cloud-based service that provides Natural Language Processing (NLP) features for understanding and analyzing text.</Description>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <AssemblyName>Apps.MicrosoftAILanguage</AssemblyName>
   </PropertyGroup>
 
@@ -24,4 +24,7 @@
     <Folder Include="DataSourceHandlers\Enums\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="..\README.md" Link="README.md" CopyToOutputDirectory="Always" />
+  </ItemGroup>
 </Project>
